@@ -5,7 +5,7 @@ Project created in Symfony 4.1.6 to test possible bug with use multiple groups i
 
 1) Sorry for me bad English.
 2) Ignore business logic (I used basic logic to simplify i want do it)
-3) I can resolve it with other options, but do not usign constraint form <code>Valid</code> (Using a unique group)</code>
+3) I can resolve it with other options (Using a unique group), but do not usign constraint form <code>Valid</code> with multiple grpuos.
 
 <strong>Before starting</strong>
 
@@ -76,8 +76,7 @@ Entity Country have the next constraint in attribute $status:
 
 <strong>Case 1</strong>
 
-If in form <code>CartNewType > items > Constraint Valid > groups</code> i use group "InformationExtra" (<code>['Information','InformationExtra','CountryValid']</code>)
-dont working others groups (<b>"Information" and "CountryValid"</b>) 
+If in form <code>CartNewType > items > Constraint Valid > groups</code> i use group "InformationExtra" (<code>['Information','InformationExtra','CountryValid']</code>) and set like INDEX 0 "InformationExtra" (<code>['InformationExtra','Information','CountryValid']</code>) in <code>ItemNewType > function configureOptions > validation_groups</code> dont working others groups (<b>"Information" and "CountryValid"</b>) but if set "InformationExtra" like INDEX 1+ work "InformationExtra" and the next Group set...
 
 Maybe the problem is produced per using a group to Attribute not Mapped ("informationExtra") in Constraint Valid.
 
@@ -86,14 +85,12 @@ Maybe the problem is produced per using a group to Attribute not Mapped ("inform
 If in form <code>CartNewType > items > Constraint Valid > groups</code> i delete group "InformationExtra" (<code>['Information','CountryValid']</code>)
 only work the first group set in <code>ItemNewType > function configureOptions > validation_groups</code> to a mapped attribute.
 
-<b>Work 'InformationExtra' and 'CountryValid'... But only valid the FIRST Item in Collection (Dont trhow Form Violation if another item Select "Mexico")</b>
+<b>Work 'InformationExtra' and 'CountryValid'... But only valid the FIRST Item in Collection (Dont trhow Form Violation if another item Select "Mexico")... to:</b>
 
 <code>$groups['InformationExtra', 'CountryValid', 'Information'];</code>  or <code>$groups['CountryValid', 'Information', 'InformationExtra'];</code> 
 
-<b>Work 'InformationExtra' and 'Information'...</b>
+<b>Work 'InformationExtra' and 'Information'... to:</b>
 
-<code>$groups['InformationExtra', 'Information', 'CountryValid'];</code> or <code>$groups['Information', 'CountryValid', 'InformationExtra'];</code> 
+<code>$groups['InformationExtra', 'Information', 'CountryValid'];</code> or <code>$groups['Information', 'CountryValid', 'InformationExtra'];</code>
 
 <strong>How can use multiple groups in Form Contraint Valid and use the OptionsResolver to decide what groups use finaly?</strong>
-
-
