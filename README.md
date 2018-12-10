@@ -94,6 +94,6 @@ only work the first group set in <code>ItemNewType > function configureOptions >
 
 <code>$groups['InformationExtra', 'Information', 'CountryValid'];</code> or <code>$groups['Information', 'CountryValid', 'InformationExtra'];</code> 
 
-<strong>How can use multiple groups in Form Contraint Valid and use the OptionsResolver to decide what groups use</strong>
+<strong>How can use multiple groups in Form Contraint Valid and use the OptionsResolver to decide what groups use finaly?</strong>
 
 
